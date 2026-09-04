@@ -247,6 +247,74 @@
       color:#f0f0f0;
     }
 
+
+    /* REVIEWS */
+    .reviews-section{
+      background:#f8f6f1;
+      overflow:hidden;
+    }
+    .reviews-wrap{
+      position:relative;
+      overflow:hidden;
+      margin-top:34px;
+      -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);
+      mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);
+    }
+    .reviews-track{
+      display:flex;
+      gap:18px;
+      width:max-content;
+      animation:reviewsScroll 30s linear infinite;
+    }
+    .reviews-wrap:hover .reviews-track{animation-play-state:paused}
+    .review-card{
+      width:340px;
+      flex:0 0 340px;
+      background:#fff;
+      border:1px solid #e9e6df;
+      border-radius:20px;
+      padding:24px;
+      box-shadow:0 10px 30px rgba(0,0,0,.06);
+    }
+    .stars{
+      letter-spacing:2px;
+      font-size:17px;
+      margin-bottom:14px;
+    }
+    .review-card p{
+      margin:0 0 18px;
+      color:#4f4f4f;
+      line-height:1.6;
+      font-size:15px;
+    }
+    .review-author{
+      display:flex;
+      align-items:center;
+      gap:11px;
+      font-weight:700;
+    }
+    .avatar{
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#efe9df;
+      font-size:14px;
+      font-weight:800;
+    }
+    .review-note{
+      text-align:center;
+      color:#7b7b7b;
+      font-size:12px;
+      margin-top:18px;
+    }
+    @keyframes reviewsScroll{
+      from{transform:translateX(0)}
+      to{transform:translateX(calc(-50% - 9px))}
+    }
+
     /* CONTACT */
     .contact-wrap{
       display:grid;
@@ -289,6 +357,106 @@
     }
     .contact .btn{align-self:flex-start;margin-top:24px}
 
+
+    /* GALLERY */
+    .gallery-section{
+      background:#fff;
+    }
+    .gallery-grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr .8fr;
+      grid-template-rows:220px 220px;
+      gap:14px;
+    }
+    .gallery-item{
+      border-radius:18px;
+      overflow:hidden;
+      min-height:200px;
+      background:#ddd;
+    }
+    .gallery-item img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform .35s ease;
+    }
+    .gallery-item:hover img{transform:scale(1.04)}
+    .gallery-item.large{grid-row:1 / span 2}
+
+    /* FAQ */
+    .faq-section{
+      background:#f8f6f1;
+    }
+    .faq-list{
+      width:min(840px,100%);
+      margin:0 auto;
+      display:grid;
+      gap:12px;
+    }
+    .faq-item{
+      background:#fff;
+      border:1px solid #e7e3dc;
+      border-radius:16px;
+      overflow:hidden;
+    }
+    .faq-item summary{
+      cursor:pointer;
+      list-style:none;
+      padding:19px 22px;
+      font-weight:700;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+    }
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{
+      content:"+";
+      font-size:24px;
+      font-weight:400;
+      line-height:1;
+    }
+    .faq-item[open] summary::after{content:"−"}
+    .faq-item p{
+      margin:0;
+      padding:0 22px 20px;
+      color:#666;
+      line-height:1.65;
+      font-size:15px;
+    }
+
+    /* FINAL CTA */
+    .final-cta{
+      padding:70px 0;
+      background:
+        linear-gradient(90deg,rgba(12,15,16,.92),rgba(12,15,16,.78)),
+        url('https://images.unsplash.com/photo-1566843972142-a7fcb70de55a?auto=format&fit=crop&w=1800&q=88') center/cover no-repeat;
+      color:#fff;
+      text-align:center;
+    }
+    .final-cta h2{
+      font-size:46px;
+      margin:0 0 14px;
+    }
+    .final-cta p{
+      max-width:650px;
+      margin:0 auto 26px;
+      color:#ededed;
+      font-size:18px;
+      line-height:1.6;
+    }
+    .final-cta-actions{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    /* MOBILE STICKY CTA */
+    .mobile-sticky{
+      display:none;
+    }
+
     footer{
       background:#0e1112;
       color:#bbb;
@@ -302,6 +470,12 @@
       flex-wrap:wrap;
     }
 
+
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      .reviews-track{animation:none}
+    }
+
     @media(max-width:980px){
       .menu{display:none}
       .hero h1{font-size:54px}
@@ -312,6 +486,44 @@
       .split-copy{padding:55px 30px}
     }
     @media(max-width:620px){
+
+      .gallery-grid{
+        grid-template-columns:1fr 1fr;
+        grid-template-rows:220px 180px 180px;
+      }
+      .gallery-item.large{
+        grid-column:1 / span 2;
+        grid-row:auto;
+      }
+      .final-cta{padding:58px 0 92px}
+      .final-cta h2{font-size:36px}
+      .mobile-sticky{
+        position:fixed;
+        left:10px;
+        right:10px;
+        bottom:10px;
+        z-index:50;
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:8px;
+        padding:8px;
+        border-radius:18px;
+        background:rgba(14,17,18,.94);
+        box-shadow:0 12px 30px rgba(0,0,0,.28);
+        backdrop-filter:blur(10px);
+      }
+      .mobile-sticky a{
+        min-height:48px;
+        border-radius:12px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        gap:8px;
+        font-weight:800;
+      }
+      .mobile-call{background:#fff;color:#111}
+      .mobile-order{background:var(--red);color:#fff}
+
       .container{width:min(100% - 28px,var(--max))}
       .nav-inner{height:74px}
       .nav .btn{padding:12px 16px}
@@ -340,6 +552,8 @@
         <a href="#carte">Notre carte</a>
         <a href="#apropos">À propos</a>
         <a href="#avis">Avis</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
       </nav>
       <a class="btn btn-red" href="tel:+33123456789">☎ Commander</a>
@@ -425,6 +639,35 @@
       </div>
     </section>
 
+
+    <section class="gallery-section" id="galerie">
+      <div class="container">
+        <div class="section-head">
+          <h2>Un aperçu de Pizza Roma</h2>
+          <p>Des pizzas généreuses, une cuisine authentique et une ambiance conviviale.</p>
+          <div class="underline"></div>
+        </div>
+
+        <div class="gallery-grid">
+          <div class="gallery-item large">
+            <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=1000&q=88" alt="Pizza artisanale">
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=88" alt="Préparation d'une pizza">
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=88" alt="Pizza italienne fraîchement préparée">
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1579684947550-22e945225d9a?auto=format&fit=crop&w=800&q=88" alt="Intérieur d'une pizzeria">
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&w=800&q=88" alt="Pizza servie à table">
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="story" id="apropos">
       <div class="split">
         <div class="split-copy">
@@ -438,6 +681,121 @@
           </div>
         </div>
         <div class="story-image" aria-label="Préparation d'une pizza"></div>
+      </div>
+    </section>
+
+
+    <section class="reviews-section" id="avis">
+      <div class="container">
+        <div class="section-head">
+          <h2>Ce que nos clients disent</h2>
+          <p>Des avis à remplacer par les vrais témoignages du restaurant.</p>
+          <div class="underline"></div>
+        </div>
+      </div>
+
+      <div class="reviews-wrap" aria-label="Avis clients défilants">
+        <div class="reviews-track">
+
+          <article class="review-card">
+            <div class="stars" aria-label="5 étoiles">★★★★★</div>
+            <p>« Pizza excellente, pâte légère et ingrédients très frais. Une vraie bonne adresse. »</p>
+            <div class="review-author"><span class="avatar">AM</span><span>Client exemple</span></div>
+          </article>
+
+          <article class="review-card">
+            <div class="stars" aria-label="5 étoiles">★★★★★</div>
+            <p>« Service rapide, accueil chaleureux et pizzas généreuses. On reviendra sans hésiter. »</p>
+            <div class="review-author"><span class="avatar">SK</span><span>Client exemple</span></div>
+          </article>
+
+          <article class="review-card">
+            <div class="stars" aria-label="5 étoiles">★★★★★</div>
+            <p>« Très bonne cuisson et produits de qualité. La Margherita était parfaite. »</p>
+            <div class="review-author"><span class="avatar">JL</span><span>Client exemple</span></div>
+          </article>
+
+          <article class="review-card">
+            <div class="stars" aria-label="5 étoiles">★★★★★</div>
+            <p>« Commande prête à l'heure, pizza encore bien chaude et très savoureuse. »</p>
+            <div class="review-author"><span class="avatar">NB</span><span>Client exemple</span></div>
+          </article>
+
+          <!-- Duplication volontaire pour une boucle de défilement fluide -->
+          <article class="review-card" aria-hidden="true">
+            <div class="stars">★★★★★</div>
+            <p>« Pizza excellente, pâte légère et ingrédients très frais. Une vraie bonne adresse. »</p>
+            <div class="review-author"><span class="avatar">AM</span><span>Client exemple</span></div>
+          </article>
+
+          <article class="review-card" aria-hidden="true">
+            <div class="stars">★★★★★</div>
+            <p>« Service rapide, accueil chaleureux et pizzas généreuses. On reviendra sans hésiter. »</p>
+            <div class="review-author"><span class="avatar">SK</span><span>Client exemple</span></div>
+          </article>
+
+          <article class="review-card" aria-hidden="true">
+            <div class="stars">★★★★★</div>
+            <p>« Très bonne cuisson et produits de qualité. La Margherita était parfaite. »</p>
+            <div class="review-author"><span class="avatar">JL</span><span>Client exemple</span></div>
+          </article>
+
+          <article class="review-card" aria-hidden="true">
+            <div class="stars">★★★★★</div>
+            <p>« Commande prête à l'heure, pizza encore bien chaude et très savoureuse. »</p>
+            <div class="review-author"><span class="avatar">NB</span><span>Client exemple</span></div>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="container">
+        <p class="review-note">Maquette : remplacez ces avis par les vrais avis du restaurant avant publication.</p>
+      </div>
+    </section>
+
+
+    <section class="faq-section" id="faq">
+      <div class="container">
+        <div class="section-head">
+          <h2>Questions fréquentes</h2>
+          <p>Des réponses rapides avant de commander.</p>
+          <div class="underline"></div>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Peut-on modifier les ingrédients d’une pizza ?</summary>
+            <p>Oui, selon les possibilités de la cuisine. Certains suppléments peuvent être facturés en plus.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Dans quelles zones livrez-vous ?</summary>
+            <p>Les quartiers et communes desservis ainsi que les éventuels minimums de commande seront indiqués ici.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Quels allergènes sont présents dans vos pizzas ?</summary>
+            <p>Les informations sur les allergènes sont disponibles sur demande. N’hésitez pas à nous signaler toute allergie avant de commander.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Peut-on commander pour un groupe ou un événement ?</summary>
+            <p>Pour une commande importante, contactez-nous à l’avance afin que nous puissions vous confirmer les quantités, le délai et les modalités.</p>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container">
+        <h2>Une pizza ce soir ?</h2>
+        <p>Choisissez votre pizza préférée et passez votre commande en quelques secondes.</p>
+        <div class="final-cta-actions">
+          <a href="tel:+33123456789" class="btn btn-red">☎ Commander maintenant</a>
+          <a href="#carte" class="btn btn-outline">Voir la carte</a>
+        </div>
       </div>
     </section>
 
@@ -463,6 +821,12 @@
       <span>Mentions légales · Instagram · Facebook</span>
     </div>
   </footer>
+
+
+  <div class="mobile-sticky" aria-label="Actions rapides">
+    <a class="mobile-call" href="tel:+33123456789">☎ Appeler</a>
+    <a class="mobile-order" href="tel:+33123456789">🍕 Commander</a>
+  </div>
 
 </body>
 </html>
